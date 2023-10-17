@@ -1,0 +1,3 @@
+import("stats")
+importFrom("stats", "sd")
+export(normalizar.estandarizar)

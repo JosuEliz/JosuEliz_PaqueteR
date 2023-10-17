@@ -1,0 +1,12 @@
+Package: JosuElizPaquete
+Type: Package
+Title: Normalize and Standarize variables
+Version: 0.1.0
+Author: Josu Elizburu
+Maintainer: The package maintainer <elizburu46@gmail.com>
+Description: This package will return the input data normalized and standarized.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Buildvignettes: true
+VignetteBuilder: knitr
