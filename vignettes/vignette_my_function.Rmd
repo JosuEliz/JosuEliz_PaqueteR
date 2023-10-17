@@ -1,0 +1,68 @@
+---
+title: "Entrega Sowtware matemático y estadístico"
+author: "Josu elizburu"
+date: "2023-10-13"
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Normalización y estandarizacón de variables 
+The next function will standarize and normalize the input variables. this variables can be individual variables (vector type) or datasets (data.frame type).
+```{r}
+normalizar.estandarizar <- function (x){ 
+  if(!is.data.frame(x)){ #when the input is an individual variable
+    if (is.numeric(x)){ #numeric input
+      normalizado <- (x-min(x))/(max(x)-min(x))
+      estandarizado <- (x-mean(x))/(sd(x))
+    }
+    else{ #If the input is not numeric, it will not be possible to compute the function so,
+      #NA will be returned
+      normalizado <- NA
+      estandarizado <- NA
+    }
+    return(list(normalizado=normalizado,estandarizado=estandarizado))
+  }
+  else{#si es un dataset
+    normalizado <- matrix(ncol=ncol(x), nrow=nrow(x))# if the input is a dataset, the output
+    #will have more than one column and thus we will have to initialize the matrix
+    estandarizado <- matrix(ncol=ncol(x), nrow=nrow(x)) #initialize the matrix
+    
+    for(i in 1:ncol(x)){
+      if (is.numeric(x[[i]])){ #numeric input
+        normalizado[,i]<- (x[[i]]-min(x[[i]]))/(max(x[[i]])-min(x[[i]])) #in every column of the new matrix 
+        #we will insert the results
+        estandarizado[,i] <- (x[[i]]-mean(x[[i]]))/(sd(x[[i]])) #in every column of the new matrix 
+        #we will insert the results
+      }
+    else{ #If the input is not numeric, it will not be possible to compute the function so,
+      #NA will be returned
+      normalizado <- NA
+      estandarizado <- NA
+    }
+    }
+  }
+  return(list(normalizado=normalizado,estandarizado=estandarizado))
+}
+```
+##Examples
+Here are some examples in order to know how to use it and to visualize what we get as output
+```{r}
+x <- c(10, 15, 22, 7, 30, 12, 18, 5, 25)
+x2 <- c(18, 15, 22, 7, 40, 12, 18, 5, 7)
+x3 <-c("a","b","b")
+datase2<-data.frame(x,x2)
+normalizar.estandarizar(x) #individual variable input
+
+normalizar.estandarizar(datase2) #dataset input
+
+normalizar.estandarizar(x3) #an non numeric data is the input
+
+
+```
