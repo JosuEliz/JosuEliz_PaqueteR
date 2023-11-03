@@ -1,4 +1,4 @@
-# Normalize and standarize the variables of an individual or dataset input
+# Normalize and standarize the variables of an individual or a dataset input
 
 normalizar.estandarizar <- function (x){
   if(!is.data.frame(x)){ #el caso que el input es un atributo y no un dataset
